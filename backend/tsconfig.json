@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "ESNext",
+    "target": "es2020",
+    "module": "NodeNext",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "NodeNext",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": ["src/**/*.ts", "index.ts"],
   "exclude": ["node_modules"]

@@ -1,1 +1,1 @@
-map ,r :w\|!pnpx ts-node --esm %<cr>
+map ,r :w\|!pnpx tsx %<cr>
