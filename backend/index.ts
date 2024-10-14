@@ -1,10 +1,15 @@
-import fastify, { FastifyInstance } from "fastify";
+import Fastify, {
+  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+} from "fastify";
 
-const server: FastifyInstance = fastify();
+const server: FastifyInstance = Fastify({});
 
 interface User {
   id: number;
   name: string;
+  habits?: Habit[];
 }
 
 const users: User[] = [
@@ -17,12 +22,11 @@ const addUser = (user: User) => {
   users.push(user);
 };
 
-server.get("/users", async (request, reply) => {
+server.get("/users", async () => {
   return users;
 });
 
 server.post<{ Body: User }>("/users", async (request, reply) => {
-  // yolo validation
   if (!request.body.name) {
     reply.code(400);
     return { error: "Name is required" };
@@ -35,7 +39,6 @@ server.post<{ Body: User }>("/users", async (request, reply) => {
 });
 
 server.listen({ port: 3000 }, (err, address) => {
-  console.log("h");
   if (err) {
     console.error(err);
     process.exit(1);
