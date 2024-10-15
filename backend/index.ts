@@ -49,6 +49,20 @@ server.get("/users", async () => {
   return users;
 });
 
+server.get(
+  "/users/:userId",
+  async (request: FastifyRequest<{ Params: { userId: number } }>, reply) => {
+    const user = users.find(
+      (user) => user.id === Number(request.params.userId),
+    );
+    if (!user) {
+      reply.code(404);
+      return { error: "User not found" };
+    }
+    return user;
+  },
+);
+
 server.post<{ Body: User }>("/users", async (request, reply) => {
   if (!request.body.name) {
     reply.code(400);
